@@ -1,40 +1,28 @@
-#include <stdio.h>
 #include <stdlib.h>
+#include "binary_trees.h"
 
 /**
- * binary_tree_node - will creates a binary tree node.
- * @parent: A pointer aiming to the parent of the node to create.
- * @value: The value to put in the new node.
+ * binary_tree_node - Creates a binary tree node
+ * @parent: Pointer to the parent node of the new node
+ * @value: Value to store in the new node
  *
- * Return: If an error occurs - NULL.
- *         Otherwise - a pointer to the new node.
+ * Return: Pointer to the newly created node, or NULL on failure
  */
+binary_tree_t *binary_tree_node(binary_tree_t *parent, int value)
+{
+    binary_tree_t *new_node;
 
+    /* Allocate memory for the new node */
+    new_node = malloc(sizeof(binary_tree_t));
+    if (new_node == NULL)
+        return (NULL);
 
-struct binary_tree_node {
-    int value;
-    struct binary_tree_node* left;
-    struct binary_tree_node* right;
-};
-
-struct binary_tree_node* binary_tree_node(struct binary_tree_node* parent, int value) {
-    struct binary_tree_node* new_node = (struct binary_tree_node*)malloc(sizeof(struct binary_tree_node));
-    if (new_node == NULL) {
-        // Memory allocation failed
-        return NULL;
-    }
-
-    new_node->value = value;
+    /* Initialize the new node */
+    new_node->n = value;
     new_node->left = NULL;
     new_node->right = NULL;
+    new_node->parent = parent;
 
-    if (parent != NULL) {
-        if (value < parent->value) {
-            parent->left = new_node;
-        } else {
-            parent->right = new_node;
-        }
-    }
-
-    return new_node;
+    /* Return a pointer to the new node */
+    return (new_node);
 }
